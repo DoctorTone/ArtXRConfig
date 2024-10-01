@@ -7,6 +7,8 @@ interface FileState {
   setIntensity: (value: number) => void;
   spotlightHelper: boolean;
   setSpotlightHelper: (status: boolean) => void;
+  pointlightHelper: boolean;
+  setPointlightHelper: (status: boolean) => void;
 }
 
 const useStore = create<FileState>((set) => ({
@@ -16,6 +18,8 @@ const useStore = create<FileState>((set) => ({
   setIntensity: (value) => set(() => ({ intensity: value })),
   spotlightHelper: false,
   setSpotlightHelper: (status) => set(() => ({ spotlightHelper: status })),
+  pointlightHelper: false,
+  setPointlightHelper: (status) => set(() => ({ pointlightHelper: status })),
 }));
 
 export default useStore;

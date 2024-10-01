@@ -7,13 +7,19 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTF } from "three-stdlib";
 import { useThree } from "@react-three/fiber";
-import { SpotLight, SpotLightHelper } from "three";
+import {
+  SpotLight,
+  SpotLightHelper,
+  PointLight,
+  PointLightHelper,
+} from "three";
 
 const Art = () => {
   const [gltf, setGltf] = useState<GLTF>();
   const file = useStore((state) => state.file);
   const { scene } = useThree();
   const spotlightHelper = useStore((state) => state.spotlightHelper);
+  const pointlightHelper = useStore((state) => state.pointlightHelper);
 
   useEffect(() => {
     if (file && !gltf) {
@@ -30,7 +36,12 @@ const Art = () => {
           setGltf(model);
           model.scene.traverse((child) => {
             if (child instanceof SpotLight) {
-              const helper = new SpotLightHelper(child);
+              const helper = new SpotLightHelper(child, 0x0000ff);
+              helper.visible = false;
+              model.scene.add(helper);
+            }
+            if (child instanceof PointLight) {
+              const helper = new PointLightHelper(child);
               helper.visible = false;
               model.scene.add(helper);
             }
@@ -58,7 +69,23 @@ const Art = () => {
         }
       });
     }
-  }, [file, spotlightHelper]);
+
+    if (pointlightHelper && gltf) {
+      scene.traverse((child) => {
+        if (child instanceof PointLightHelper) {
+          child.visible = true;
+        }
+      });
+    }
+
+    if (!pointlightHelper && gltf) {
+      scene.traverse((child) => {
+        if (child instanceof PointLightHelper) {
+          child.visible = false;
+        }
+      });
+    }
+  }, [file, spotlightHelper, pointlightHelper]);
 
   return (
     <Suspense fallback={<Loading />}>

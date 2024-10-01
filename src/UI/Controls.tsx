@@ -4,6 +4,7 @@ import useStore from "../state/store";
 const Controls = () => {
   const setIntensity = useStore((state) => state.setIntensity);
   const setSpotlightHelper = useStore((state) => state.setSpotlightHelper);
+  const setPointlightHelper = useStore((state) => state.setPointlightHelper);
 
   useControls({
     ambient: {
@@ -18,8 +19,13 @@ const Controls = () => {
     spotlightHelper: {
       value: false,
       onChange: (v) => {
-        console.log("Spot changed", v);
         setSpotlightHelper(v);
+      },
+    },
+    pointlightHelper: {
+      value: false,
+      onChange: (v) => {
+        setPointlightHelper(v);
       },
     },
   });
