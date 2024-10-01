@@ -1,10 +1,13 @@
 import { FileUploader } from "react-drag-drop-files";
+import useStore from "../state/store";
 
 const fileTypes = ["gltf", "glb"];
 
 const DragDrop = () => {
-  const handleChange = (file: unknown) => {
-    console.log("Dropped file", file);
+  const setFile = useStore((state) => state.setFile);
+  const handleChange = (file: File) => {
+    console.log("Dropped", file.name);
+    setFile(file);
   };
 
   return (
