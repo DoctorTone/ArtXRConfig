@@ -3,6 +3,7 @@ import { OrbitControls } from "@react-three/drei";
 import Art from "./components/Art";
 import { SCENE } from "./state/Config";
 import DragDrop from "./components/DragDrop";
+import Controls from "./UI/Controls";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         />
       </Canvas>
       <DragDrop />
+      <Controls />
     </>
   );
 }

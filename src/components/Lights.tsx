@@ -1,9 +1,11 @@
-import { SCENE } from "../state/Config";
+import useStore from "../state/store";
 
 const Lights = () => {
+  const intensity = useStore((state) => state.intensity);
+
   return (
     <>
-      <ambientLight intensity={SCENE.ambientIntensity} />
+      <ambientLight intensity={intensity} />
     </>
   );
 };
