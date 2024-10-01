@@ -16,3 +16,8 @@ body {
   position: absolute;
   z-index: 100;
 }
+#dropIt {
+  top: 20%;
+  left: 33%;
+  width: 60%;
+}
